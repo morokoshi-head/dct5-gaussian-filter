@@ -11,6 +11,10 @@ from tqdm import tqdm
 
 EXT = "*.bmp"
 
+SIGMA = 2
+RADIUS = round(SIGMA * 3.3)
+DIM = 4
+
 
 def get_kernel(sigma, radius, dim, phi):
     kernel = [0.0] * dim
@@ -81,9 +85,6 @@ def main():
 
     files = glob.glob(input_dir + "/" + EXT)
 
-    sigma = 2
-    radius = round(sigma * 3.3)
-    dim = 4
 
     for file in tqdm(files):
         file_name = os.path.basename(file)
@@ -96,10 +97,10 @@ def main():
 
         for idx in range(ch):
             # horizontal
-            blr = gaussian_filter(src[:, :, idx], sigma, radius, dim)
+            blr = gaussian_filter(src[:, :, idx], SIGMA, RADIUS, DIM)
 
             # vertical
-            blr = gaussian_filter(blr.T, sigma, radius, dim)
+            blr = gaussian_filter(blr.T, SIGMA, RADIUS, DIM)
 
             dst[:, :, idx] = blr.T
 

@@ -107,4 +107,5 @@ def main():
         cv2.imwrite((output_dir + "/" + file_name), dst)
 
 
-main()
+if __name__ == "__main__":
+    main()
